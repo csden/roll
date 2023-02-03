@@ -137,9 +137,10 @@ main(int argc, char* argv[])
   // play each note.
   for (int i = 0; i < len; i++) {
     int freq = audible_freq(notes[i]);
+    float c = 2 * M_PI * freq / SAMPLE_RATE;
 
     for (int j = 0; j < SAMPLES; j++) {
-      buf[j] = WAVE_AMPLITUDE * sin(2 * M_PI * j * freq / SAMPLE_RATE);
+      buf[j] = WAVE_AMPLITUDE * sin(c * j);
     }
 
     ret = pa_simple_write(s, buf, sizeof(buf), &err);
